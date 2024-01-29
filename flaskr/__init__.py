@@ -24,7 +24,7 @@ def create_app(test_config=None):
     def index():
         connection = db.get_db_connection()
         cursor = connection.cursor()
-        cursor.execute('SELECT * FROM stock_tracked;')
+        cursor.execute('SELECT * FROM stocks_tracked;')
         stocks_tracked = cursor.fetchall()
         cursor.close()
         connection.close()
