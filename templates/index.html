@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{% block title %} PInvent {% endblock %}</h1>
+  {% for stock in stock_tracked %}
+    <div class="stock">
+      <h3>{{ stock[0] }} - {{ stock[1] }}</h3>
+      <p>{{ stock[2] }}</p>
+    </div>
+  {% endfor %}
+{% endblock %}
