@@ -2,8 +2,32 @@
 
 {% block search_results %}
 
+		<h2>{{results['symbol']}}</h2>
+
+		<form method="post" action="{{url_for('stock.buy')}}">
+			<input type="number" name="stock_buy_shares" min="1" max="1000">
+			<input type="hidden" name="stock_buy_name" value="{{results['symbol']}}">
+			<input type="hidden" name="stock_buy_price" value="{{results['currentPrice']}}">
+			<input type="submit" value="buy">
+		</form>
+
+		<p><strong>Open</strong> - {{results['open']}}</p>
+		<p><strong>Low</strong> - {{results['dayLow']}}</p>
+		<p><strong>High</strong> - {{results['dayHigh']}}</p>
+		<p><strong>Current</strong> - {{results['currentPrice']}}</p>
+		<p><strong>Volume</strong> - {{results['volume']}}</p>
+		<p><strong>Shares of shorts</strong> - {{results['sharesShort']}}</p>
+		<p><strong>Short Ratio</strong> - {{results['shortRatio']}}</p>
+		<p><strong>Total Debt</strong> - {{results['totalDebt']}}</p>
+		<p><strong>Total Revenue</strong> - {{results['totalRevenue']}}</p>
+		<p><strong>Industry</strong> - {{results['industry']}}</p>
+		<p><strong>Business Summary</strong> - {{results['longBusinessSummary']}}</p>
+
+		<!--
 	{% for i in results %}
 		<h3>{{i}}</h3>
 		<p>{{results[i]}}</p>
 	{% endfor %}
+		-->
+
 {% endblock %}
