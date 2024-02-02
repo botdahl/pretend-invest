@@ -1,0 +1,9 @@
+{% extends 'stock/search.html' %}
+
+{% block search_results %}
+
+	{% for i in results %}
+		<h3>{{i}}</h3>
+		<p>{{results[i]}}</p>
+	{% endfor %}
+{% endblock %}
