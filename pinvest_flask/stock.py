@@ -18,7 +18,7 @@ def search():
 
     return render_template('stock/search.html')
 
-@bp.route('/search/buy', methods=('GET', 'POST'))
+@bp.route('/buy', methods=('GET', 'POST'))
 def buy():
     if request.method == 'POST':
         if 'stock_buy_name' in request.form:
@@ -40,3 +40,19 @@ def buy():
                 print(error)
 
     return redirect(url_for('stock.search'))
+
+@bp.route('/<int:id>/delete', methods=('GET', 'POST'))
+def delete(id):
+    try:
+        print(id)
+        connection = get_db_connection()
+        cursor = connection.cursor()
+        cursor.execute("DELETE FROM stocks_tracked WHERE id = '%s'" % (id,))
+
+        connection.commit()
+        cursor.close()
+        connection.close()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+
+    return redirect(url_for('index'))
