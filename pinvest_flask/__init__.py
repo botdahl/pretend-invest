@@ -25,12 +25,12 @@ def create_app(test_config=None):
     def index():
         connection = db.get_db_connection()
         cursor = connection.cursor()
-        cursor.execute('SELECT * FROM stocks_tracked;')
-        stocks_tracked = cursor.fetchall()
+        cursor.execute('SELECT * FROM stock;')
+        stock = cursor.fetchall()
         cursor.close()
         connection.close()
 
-        return render_template('index.html', stocks_tracked=stocks_tracked)
+        return render_template('index.html', stock=stock)
 
     db.init_app(app)
 

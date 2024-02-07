@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>{% block title %} stocks {% endblock %}</h1>
-  {% for stock in stocks_tracked %}
+  <h1>{% block title %} Portfolio {% endblock %}</h1>
+  {% for stock in stock %}
     <div class="stocks">
-      <h3>{{ stock[0] }} - {{ stock[1] }}</h3>
-      <p>{{ stock[2] }}</p>
+      <h3>{{ stock[0] }} - {{ stock[2] }}</h3>
+      <p>{{ stock[3] }}</p>
     </div>
   {% endfor %}
 {% endblock %}

@@ -17,18 +17,36 @@ def init_app(app):
 def init_db():
     connection = get_db_connection()
     cursor = connection.cursor()
+
     cursor.execute('DROP TABLE IF EXISTS stocks_tracked;')
+
+    cursor.execute('DROP TABLE IF EXISTS portfolio;')
     cursor.execute('''
-            CREATE TABLE stocks_tracked (
+            CREATE TABLE portfolio (
             id serial PRIMARY KEY,
-            stock_name TEXT UNIQUE NOT NULL,
-            stock_saved_price DECIMAL NOT NULL);
+            name TEXT NOT NULL,
+            balance INTEGER NOT NULL);
+        ''')
+
+    cursor.execute('DROP TABLE IF EXISTS stock;')
+    cursor.execute('''
+            CREATE TABLE stock (
+            id serial PRIMARY KEY,
+            portfolio_id INTEGER NOT NULL,
+            name TEXT NOT NULL,
+            price DECIMAL NOT NULL,
+            amount INTEGER NOT NULL);
         ''')
 
     cursor.execute('''
-            INSERT INTO stocks_tracked (stock_name, stock_saved_price)
+            INSERT INTO portfolio (name, balance)
             VALUES (%s, %s)''',
-            ('GME', 14.13))
+            ('TEST', 100000))
+
+    cursor.execute('''
+            INSERT INTO stock (portfolio_id, name, price, amount)
+            VALUES (%s, %s, %s, %s)''',
+            (1, 'GME', 14.3, 10))
     
     connection.commit()
     cursor.close()
